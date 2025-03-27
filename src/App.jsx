@@ -152,7 +152,7 @@ const DeviceManager = () => {
               <li key={index}>
                 <strong>Plant Name:</strong> {device.crop}, <strong>Region:</strong> {device.region}
                 <button onClick={() => handleUpdateDevice(device)}>Update</button>
-                <button>Delete</button> 
+                <button>DeleteAll</button> 
                 <button>Go Manual</button>
               </li>
             ))}
