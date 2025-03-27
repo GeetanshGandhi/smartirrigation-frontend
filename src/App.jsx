@@ -53,8 +53,9 @@ const DeviceManager = () => {
     if (!cropName || !region) return;
 
     const newDevice = {
-      crop: cropName,
+      cropType: cropName,
       region: region,
+      temparature:23
     };
 
     try {
@@ -83,16 +84,14 @@ const DeviceManager = () => {
 
   // Function to update a device
   const handleUpdateDevice = async (device) => {
-    const updatedDevice = {
-      crop: device.crop, // Keeping the same crop name
-      region: device.region + " (Updated)", // Modify the region for demo purposes
-    };
+    const formData = new FormData();
+    formData.append("cropType", device.crop); 
+    formData.append("region", device.region); 
 
     try {
       const response = await fetch("http://localhost:8080/device/update", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedDevice),
+        body: formData, 
       });
 
       if (!response.ok) {
