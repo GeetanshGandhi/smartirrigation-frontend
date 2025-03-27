@@ -38,14 +38,19 @@
 // export default AddDevice;
 
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const DeviceManager = () => {
   const [devices, setDevices] = useState([]);
+  useEffect(()=>{
+    fetch("http://localhost:8080/device/add",{
+      method: 'GET',headers: {"Content-Type":"application/json"}
+    })
+  },[])
   const [showAddForm, setShowAddForm] = useState(false);
   const [cropName, setCropName] = useState("");
   const [region, setRegion] = useState("");
-
+  const [deviceToAdd, setDeviceToAdd] = useState({});
   // Function to add a device
   const handleAddDevice = async (e) => {
     e.preventDefault();
@@ -117,7 +122,8 @@ const DeviceManager = () => {
 
       const deviceInfo = {
         name: device.name,
-        macAddress: device.id,
+        region: '',
+        temperature: ''
       };
 
       setDevices((prevDevices) => [...prevDevices, deviceInfo]);
